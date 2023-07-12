@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from random import choice, randint, shuffle
+import pandas
 import pyperclip
 
 
@@ -35,10 +36,10 @@ def save_data():
                                        message=f"These are the details entered: \nEmail: {email_input.get()}\nPassword: {password_input.get()}\nIs it ok to save?")
 
         if is_ok:
-            data = f"{website_input.get()} | {email_input.get()} | {password_input.get()}\n"
-            with open("data.txt", "a") as file:
-                file.write(data)
-                website_input.delete(0, END)
+            pandas.DataFrame().to_csv()
+            data = {"Website": website_input.get(), "Email": email_input.get(), "Password": password_input.get()}
+            pandas.DataFrame(data, index=[0]).to_csv("data.csv")
+            website_input.delete(0, END)
             password_input.delete(0, END)
 
 
